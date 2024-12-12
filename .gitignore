@@ -1,0 +1,18 @@
+# Object files
+*.o
+
+# Libraries
+*.a
+
+# Executables
+*.out
+
+# Whatever
+*.gch
+
+#folders
+*/
+
+# text files
+*.txt
+
