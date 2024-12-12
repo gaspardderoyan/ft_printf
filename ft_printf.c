@@ -1,8 +1,4 @@
-#include <stdarg.h>
-#include <unistd.h>
-
-size_t	ft_strlen(const char *s);
-char	*ft_itoa(int n);
+#include "ft_printf.h"
 
 void	choose_fun(va_list *ptr, const char **str, int *ccount)
 {
@@ -45,15 +41,4 @@ int	ft_printf(const char *str, ...)
 	}
 	va_end(ptr);
 	return(ccount);
-}
-
-#include <stdio.h>
-int	main(void)
-{
-	int	count;
-	
-	count = ft_printf("This should print an X --> %c.\nv --> %c\n", 'X', 'v'); 
-	count += ft_printf("This should print 1337 --> %i.\n", 1337); 
-	printf("Count of chars: %d\n", count);
-	return (0);
 }
