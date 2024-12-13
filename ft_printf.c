@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include "types.h"
 
 void	choose_fun(va_list *ptr, const char **str, int *ccount)
 {
@@ -6,29 +7,13 @@ void	choose_fun(va_list *ptr, const char **str, int *ccount)
 
 	type = *(*str + 1);
 	if (type == 'c')
-	{
-		char c = (char)va_arg(*ptr, int);
-		write(1, &c, 1);
-		(*ccount)++;
-	}
+		p_char(ptr, ccount);
 	else if (type == 'i')
-	{
-		char *str = ft_itoa(va_arg(*ptr, int));
-		int len = ft_strlen(str);
-		write(1, str, len);
-		*ccount += len;
-	}
+		p_int(ptr, ccount);
 	else if (type == '%')
-	{
-		write(1, "%", 1);
-		(*ccount)++;
-	}
+		p_percent(ccount);
 	else
-	{
-		write(1, *str, 1);
-		write(1, *str + 1, 1);
-		*ccount += 2;
-	}
+		p_else(*str, ccount);
 	(*str)++;
 }
 

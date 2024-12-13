@@ -1,9 +1,9 @@
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#ifndef HELPERS_H
+# define HELPERS_H
 # include <stdlib.h>
 # include <limits.h>
 
-static unsigned int	ft_abs(int n);
-static int			ft_nbr_len(int n);
+size_t				ft_strlen(const char *s);
+char				*ft_itoa(int n);
 
 #endif
