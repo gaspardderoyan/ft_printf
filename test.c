@@ -7,6 +7,7 @@ int	main(void)
 	
 	printf("\n--- TEST OUTPUT ---\n\n");
 	count = ft_printf("X --> %c\nv --> %c\n", 'X', 'v'); 
+	count += ft_printf("Test string --> %s\n", "Test string");
 	count += ft_printf("1337 --> %i\nz --> %c\n", 1337, 'z'); 
 	count += ft_printf("% --> %%\nz --> %c\n", 'z'); 
 	printf("Count of chars: %d\n", count);

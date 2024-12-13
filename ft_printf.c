@@ -8,6 +8,8 @@ void	choose_fun(va_list *ptr, const char **str, int *ccount)
 	type = *(*str + 1);
 	if (type == 'c')
 		p_char(ptr, ccount);
+	else if (type == 's')
+		p_str(ptr, ccount);
 	else if (type == 'i')
 		p_int(ptr, ccount);
 	else if (type == '%')
