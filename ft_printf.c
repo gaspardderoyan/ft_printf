@@ -18,6 +18,17 @@ void	choose_fun(va_list *ptr, const char **str, int *ccount)
 		write(1, str, len);
 		*ccount += len;
 	}
+	else if (type == '%')
+	{
+		write(1, "%", 1);
+		(*ccount)++;
+	}
+	else
+	{
+		write(1, *str, 1);
+		write(1, *str + 1, 1);
+		*ccount += 2;
+	}
 	(*str)++;
 }
 
