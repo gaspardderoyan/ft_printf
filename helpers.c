@@ -12,6 +12,18 @@ size_t	strlen_safe(const char *s)
 	return (i);
 }
 
+static char	*ft_strcpy(char *dst, char *src)
+{
+	while (*src)
+	{
+		*dst = *src;
+		dst++;
+		src++;
+	}
+	*dst = 0;
+	return (dst);
+}
+
 static unsigned int	ft_abs(int n)
 {
 	unsigned int	num;
@@ -42,7 +54,7 @@ static int	ft_nbr_len(int n)
 	return (len);
 }
 
-static int	ft_hex_len(unsigned int n)
+static int	ft_hex_len(long n)
 {
 	int	len;
 
@@ -82,7 +94,7 @@ char	*ft_itoa(int n)
 	return (res);
 }
 
-char *ft_itohex(unsigned int n)
+char *ft_itohex(long n)
 {
 	int		len;
 	char	*res;
@@ -107,14 +119,3 @@ char *ft_itohex(unsigned int n)
 	return (res);
 }
 
-char	*ft_strcpy(char *dst, char *src)
-{
-	while (*src)
-	{
-		*dst = *src;
-		dst++;
-		src++;
-	}
-	*dst = 0;
-	return (dst);
-}

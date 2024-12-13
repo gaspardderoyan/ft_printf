@@ -5,7 +5,6 @@
 
 size_t				strlen_safe(const char *s);
 char				*ft_itoa(int n);
-char				*ft_strcpy(char *dst, char *src);
-char				*ft_itohex(unsigned int n);
+char				*ft_itohex(long n);
 
 #endif

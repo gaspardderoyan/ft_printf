@@ -29,14 +29,15 @@ void	p_str(va_list *ptr, int *ccount)
 
 void	p_ptr(va_list *ptr, int *ccount)
 {
-	uintptr_t	adr;	
+	long		adr;	
 	char		*str;
 	int			len;
 
-	adr = (uintptr_t)va_arg(*ptr, int);
+	adr = (long)va_arg(*ptr, long);
 	str = ft_itohex(adr);
 	len = strlen_safe(str);
-	*ccount += len;
+	*ccount += len + 2;
+	write(1, "0x", 2);
 	write(1, str, len);
 	free(str);
 }
