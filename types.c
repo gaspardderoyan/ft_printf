@@ -10,6 +10,37 @@ void	p_char(va_list *ptr, int *ccount)
 	(*ccount)++;
 }
 
+void	p_str(va_list *ptr, int *ccount)
+{
+	char	*str;
+	int		len;
+
+	str = va_arg(*ptr, char *);
+	len = strlen_safe(str);
+	*ccount += len;
+	if (str)
+		write(1, str, len);
+	else
+	{
+		write(1, "(null)", 6);
+		*ccount += 6;
+	}
+}
+
+void	p_ptr(va_list *ptr, int *ccount)
+{
+	uintptr_t	adr;	
+	char		*str;
+	int			len;
+
+	adr = (uintptr_t)va_arg(*ptr, int);
+	str = ft_itohex(adr);
+	len = strlen_safe(str);
+	*ccount += len;
+	write(1, str, len);
+	free(str);
+}
+
 void	p_int(va_list *ptr, int *ccount)
 {
 	char	*str;
@@ -33,21 +64,4 @@ void	p_else(const char *str, int *ccount)
 	write(1, str, 1);
 	write(1, str + 1, 1);
 	*ccount += 2;
-}
-
-void	p_str(va_list *ptr, int *ccount)
-{
-	char	*str;
-	int		len;
-
-	str = va_arg(*ptr, char *);
-	len = strlen_safe(str);
-	*ccount += len;
-	if (str)
-		write(1, str, len);
-	else
-	{
-		write(1, "(null)", 6);
-		*ccount += 6;
-	}
 }

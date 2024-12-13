@@ -10,6 +10,8 @@ void	choose_fun(va_list *ptr, const char **str, int *ccount)
 		p_char(ptr, ccount);
 	else if (type == 's')
 		p_str(ptr, ccount);
+	else if (type ==  'p')
+		p_ptr(ptr, ccount);
 	else if (type == 'i')
 		p_int(ptr, ccount);
 	else if (type == '%')
@@ -26,7 +28,7 @@ int	ft_printf(const char *str, ...)
 
 	ccount = 0;
 	va_start(ptr, str);
-	while (*str)	
+	while (*str)
 	{
 		if (*str != '%')
 		{
