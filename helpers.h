@@ -3,7 +3,7 @@
 # include <stdlib.h>
 # include <limits.h>
 
-size_t				ft_strlen(const char *s);
+size_t				strlen_safe(const char *s);
 char				*ft_itoa(int n);
 
 #endif

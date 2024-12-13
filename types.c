@@ -16,7 +16,7 @@ void	p_int(va_list *ptr, int *ccount)
 	int		len;
 
 	str = ft_itoa(va_arg(*ptr, int));
-	len = ft_strlen(str);
+	len = strlen_safe(str);
 	write(1, str, len);
 	free(str);
 	*ccount += len;
@@ -41,7 +41,13 @@ void	p_str(va_list *ptr, int *ccount)
 	int		len;
 
 	str = va_arg(*ptr, char *);
-	len = ft_strlen(str);
+	len = strlen_safe(str);
 	*ccount += len;
-	write(1, str, len);
+	if (str)
+		write(1, str, len);
+	else
+	{
+		write(1, "(null)", 6);
+		*ccount += 6;
+	}
 }
