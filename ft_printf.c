@@ -3,23 +3,23 @@
 
 void	choose_fun(va_list *ptr, const char **str, int *ccount)
 {
-	char type;
+	char	type;
 
 	type = *(*str + 1);
 	if (type == 'c')
 		p_char(ptr, ccount);
 	else if (type == 's')
 		p_str(ptr, ccount);
-	else if (type ==  'p')
+	else if (type == 'p')
 		p_ptr(ptr, ccount);
 	else if (type == 'i' || type == 'd')
 		p_int(ptr, ccount);
 	else if (type == 'u')
-		p_ulong(ptr, ccount); 
+		p_ubase(ptr, ccount, "0123456789");
 	else if (type == 'x')
-		p_hex_low(ptr, ccount); 
+		p_ubase(ptr, ccount, "0123456789abcdef");
 	else if (type == 'X')
-		p_hex_upp(ptr, ccount); 
+		p_ubase(ptr, ccount, "0123456789ABCDEF");
 	else if (type == '%')
 		p_percent(ccount);
 	else
@@ -29,8 +29,8 @@ void	choose_fun(va_list *ptr, const char **str, int *ccount)
 
 int	ft_printf(const char *str, ...)
 {
-	va_list ptr;
-	int	ccount;
+	va_list	ptr;
+	int		ccount;
 
 	ccount = 0;
 	va_start(ptr, str);
@@ -46,5 +46,5 @@ int	ft_printf(const char *str, ...)
 		str++;
 	}
 	va_end(ptr);
-	return(ccount);
+	return (ccount);
 }

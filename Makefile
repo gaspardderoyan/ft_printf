@@ -3,7 +3,8 @@ NAME = libftprintf.a
 MY_SOURCES = \
 			 ft_printf.c \
 			 helpers.c \
-			 types.c
+			 types.c \
+			 types_nbr.c
 
 MY_OBJECTS = $(MY_SOURCES:.c=.o)
 

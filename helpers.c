@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gderoyqn <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/14 01:07:56 by gderoyqn          #+#    #+#             */
+/*   Updated: 2024/12/14 01:08:20 by gderoyqn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "helpers.h"
 
 size_t	strlen_safe(const char *s)
@@ -12,161 +24,32 @@ size_t	strlen_safe(const char *s)
 	return (i);
 }
 
-static char	*ft_strcpy(char *dst, char *src)
-{
-	while (*src)
-	{
-		*dst = *src;
-		dst++;
-		src++;
-	}
-	*dst = 0;
-	return (dst);
-}
-
-static unsigned int	ft_abs(int n)
-{
-	unsigned int	num;
-
-	if (n == INT_MIN)
-		num = (unsigned int)INT_MAX + 1;
-	else if (n < 0)
-		num = -n;
-	else
-		num = n;
-	return (num);
-}
-
-static int	ft_nbr_len(int n)
+static int	ft_nbrlen_base(unsigned long long n, int base)
 {
 	int				len;
-	unsigned int	num;
 
 	len = 0;
 	if (n <= 0)
-		len = 1;
-	num = ft_abs(n);
-	while (num != 0)
 	{
-		num /= 10;
+		len = 1;
+		n = -n;
+	}
+	while (n != 0)
+	{
+		n /= base;
 		len++;
 	}
 	return (len);
 }
 
-static int	ft_hex_len(uintptr_t n)
+char	*ft_itoa_base(unsigned long long n, char *base)
 {
-	int	len;
-
-	len = 0;
-	if (n == 0)
-		len = 1;
-	while (n != 0)
-	{
-		n /= 16;
-		len++;
-	}
-	return (len);
-}
-
-char	*ft_itoa(int n)
-{
-	int					len;
-	char				*res;
-	unsigned int		num;
-
-	len = ft_nbr_len(n);
-	res = (char *)malloc(sizeof(char) * (len + 1));
-	if (!res)
-		return (NULL);
-	res[len] = '\0';
-	num = ft_abs(n);
-	if (n == 0)
-	{
-		res[0] = '0';
-		return (res);
-	}
-	while (num != 0)
-	{
-		res[--len] = (num % 10) + '0';
-		num /= 10;
-	}
-	if (n < 0)
-		res[--len] = '-';
-	return (res);
-}
-
-char *ft_itohex(uintptr_t n)
-{
-	int		len;
-	char	*res;
-	char	hexas[17];
-
-	ft_strcpy(hexas, "0123456789abcdef");
-	len = ft_hex_len(n);
-	res = (char *)malloc(sizeof(char) * (len + 1));
-	if (!res)
-		return (NULL);
-	res[len] = '\0';
-	if (n == 0)
-	{
-		res[0] = '0';
-		return (res);
-	}
-	while (n != 0)
-	{
-		res[--len] = *((n % 16) + hexas);
-		n /= 16;
-	}
-	return (res);
-}
-
-char *ft_itohex_upper(uintptr_t n)
-{
-	int		len;
-	char	*res;
-	char	hexas[17];
-
-	ft_strcpy(hexas, "0123456789ABCDEF");
-	len = ft_hex_len(n);
-	res = (char *)malloc(sizeof(char) * (len + 1));
-	if (!res)
-		return (NULL);
-	res[len] = '\0';
-	if (n == 0)
-	{
-		res[0] = '0';
-		return (res);
-	}
-	while (n != 0)
-	{
-		res[--len] = *((n % 16) + hexas);
-		n /= 16;
-	}
-	return (res);
-}
-
-static int	ft_uint_len(unsigned int n)
-{
-	int				len;
-
-	len = 0;
-	if (n == 0)
-		len = 1;
-	while (n != 0)
-	{
-		n /= 10;
-		len++;
-	}
-	return (len);
-}
-
-char	*ft_utoa(unsigned int n)
-{
+	int		base_len;
 	int		len;
 	char	*res;
 
-	len = ft_uint_len(n);
+	base_len = strlen_safe(base);
+	len = ft_nbrlen_base(n, base_len);
 	res = (char *)malloc(sizeof(char) * (len + 1));
 	if (!res)
 		return (NULL);
@@ -174,13 +57,12 @@ char	*ft_utoa(unsigned int n)
 	if (n == 0)
 	{
 		res[0] = '0';
-		res[1] = 0;
 		return (res);
 	}
 	while (n != 0)
 	{
-		res[--len] = (n % 10) + '0';
-		n /= 10;
+		res[--len] = *((n % base_len) + base);
+		n /= base_len;
 	}
 	return (res);
 }
