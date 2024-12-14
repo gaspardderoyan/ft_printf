@@ -25,8 +25,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-test: all
-	cc test.c -L. -lftprintf -o test.out
-	./test.out
-
