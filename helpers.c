@@ -7,7 +7,7 @@ size_t	strlen_safe(const char *s)
 	i = 0;
 	if (!s)
 		return (0);
-	while (*s++)
+	while (s[i])
 		i++;
 	return (i);
 }
@@ -54,11 +54,13 @@ static int	ft_nbr_len(int n)
 	return (len);
 }
 
-static int	ft_hex_len(long n)
+static int	ft_hex_len(uintptr_t n)
 {
 	int	len;
 
 	len = 0;
+	if (n == 0)
+		len = 1;
 	while (n != 0)
 	{
 		n /= 16;
@@ -94,7 +96,7 @@ char	*ft_itoa(int n)
 	return (res);
 }
 
-char *ft_itohex(long n)
+char *ft_itohex(uintptr_t n)
 {
 	int		len;
 	char	*res;
@@ -119,3 +121,66 @@ char *ft_itohex(long n)
 	return (res);
 }
 
+char *ft_itohex_upper(uintptr_t n)
+{
+	int		len;
+	char	*res;
+	char	hexas[17];
+
+	ft_strcpy(hexas, "0123456789ABCDEF");
+	len = ft_hex_len(n);
+	res = (char *)malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
+	res[len] = '\0';
+	if (n == 0)
+	{
+		res[0] = '0';
+		return (res);
+	}
+	while (n != 0)
+	{
+		res[--len] = *((n % 16) + hexas);
+		n /= 16;
+	}
+	return (res);
+}
+
+static int	ft_uint_len(unsigned int n)
+{
+	int				len;
+
+	len = 0;
+	if (n == 0)
+		len = 1;
+	while (n != 0)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_utoa(unsigned int n)
+{
+	int		len;
+	char	*res;
+
+	len = ft_uint_len(n);
+	res = (char *)malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
+	res[len] = '\0';
+	if (n == 0)
+	{
+		res[0] = '0';
+		res[1] = 0;
+		return (res);
+	}
+	while (n != 0)
+	{
+		res[--len] = (n % 10) + '0';
+		n /= 10;
+	}
+	return (res);
+}

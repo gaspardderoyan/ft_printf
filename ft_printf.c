@@ -12,8 +12,14 @@ void	choose_fun(va_list *ptr, const char **str, int *ccount)
 		p_str(ptr, ccount);
 	else if (type ==  'p')
 		p_ptr(ptr, ccount);
-	else if (type == 'i')
+	else if (type == 'i' || type == 'd')
 		p_int(ptr, ccount);
+	else if (type == 'u')
+		p_ulong(ptr, ccount); 
+	else if (type == 'x')
+		p_hex_low(ptr, ccount); 
+	else if (type == 'X')
+		p_hex_upp(ptr, ccount); 
 	else if (type == '%')
 		p_percent(ccount);
 	else

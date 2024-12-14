@@ -10,5 +10,8 @@ void				p_percent(int *ccount);
 void				p_else(const char *str, int *ccount);
 void				p_str(va_list *ptr, int *ccount);
 void				p_ptr(va_list *ptr, int *ccount);
+void				p_ulong(va_list *ptr, int *ccount);
+void				p_hex_low(va_list *ptr, int *ccount);
+void				p_hex_upp(va_list *ptr, int *ccount);
 
 #endif
