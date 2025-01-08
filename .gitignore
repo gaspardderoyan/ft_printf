@@ -16,5 +16,8 @@
 # text files
 *.txt
 
+# json
+*.json
+
 test.c
 pft/
